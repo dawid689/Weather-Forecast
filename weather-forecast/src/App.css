@@ -51,15 +51,15 @@
   margin-bottom: 0.7rem;
 }
 
-.weather_date {
-  font-size: 1rem;
+.weather_pressure {
+  font-size: 1.05rem;
   font-weight: normal;
   color: rgb(222, 211, 211);
 }
 
 .weather_country {
   height: 100%;
-  padding-bottom: 1rem;
+  padding-bottom: 0.9rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

@@ -6,39 +6,72 @@ import { useEffect, useState } from "react";
 function App() {
   const [degrees, setDegrees] = useState(null);
   const [location, setLocation] = useState("");
+  const [userLocation, setUserLocation] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
   const [humidity, setHumidity] = useState(null);
   const [wind, setWind] = useState(null);
+  const [pressure, setPressure] = useState(null);
   const [country, setCountry] = useState("");
+  const [dataFetched, setDataFetched] = useState(false);
 
-  const API_KEY = "cdb7020c69b26f0f17fa5611145318d4";
+  const fetchData = async (e) => {
+    e.preventDefault();
 
-  const fetchData = async () => {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=tokyo&appid=${API_KEY}&units=metric`
-    );
-    const data = await response.data;
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${userLocation}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+      );
+      const data = await response.data;
 
-    setDegrees(data.main.temp);
-    setLocation(data.name);
-    setDescription(data.weather[0].description);
-    setIcon(data.weather[0].icon);
-    setHumidity(data.main.humidity);
-    setWind(data.wind.speed);
-    setCountry(data.sys.country);
+      setDegrees(data.main.temp);
+      setLocation(data.name);
+      setDescription(data.weather[0].description);
+      setIcon(data.weather[0].icon);
+      setHumidity(data.main.humidity);
+      setWind(data.wind.speed);
+      setPressure(data.main.pressure);
+      setCountry(data.sys.country);
 
-    console.log(data);
+      setDataFetched(true);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      alert("Please enter a valid location");
+    }
+  };
+
+  const defaultDataFetched = async () => {
+    if (!dataFetched) {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=london&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+      );
+      const data = await response.data;
+
+      setDegrees(data.main.temp);
+      setLocation(data.name);
+      setDescription(data.weather[0].description);
+      setIcon(data.weather[0].icon);
+      setHumidity(data.main.humidity);
+      setWind(data.wind.speed);
+      setPressure(data.main.pressure);
+      setCountry(data.sys.country);
+    }
   };
 
   useEffect(() => {
-    fetchData();
+    defaultDataFetched();
   }, []);
 
   return (
     <div className="App">
       <div className="weather">
-        <Input />
+        <Input
+          text={(e) => setUserLocation(e.target.value)}
+          submit={fetchData}
+          func={fetchData}
+        />
         <div className="weather_display">
           <h3 className="weather_location">Weather in {location}</h3>
         </div>
@@ -61,7 +94,9 @@ function App() {
           </div>
           <div className="weather_country">
             <h3>{country}</h3>
-            <h2 className="weather_date">7/23/2022, 11:30:24 PM</h2>
+            <h2 className="weather_pressure">
+              Atmospheric pressure: {pressure} hPa
+            </h2>
           </div>
         </div>
       </div>
