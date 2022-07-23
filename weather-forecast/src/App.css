@@ -1,0 +1,17 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(222, 211, 211);
+}
+
+.weather {
+  width: 35rem;
+  height: 28rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
