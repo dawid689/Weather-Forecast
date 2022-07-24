@@ -15,4 +15,64 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  justify-content: space-around;
+}
+
+.weather_location {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.weather_degrees {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.weather_description {
+  display: flex;
+  align-items: center;
+}
+
+.weather_description_head {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0rem;
+}
+
+.weather_icon {
+  font-size: 2rem;
+  margin-right: 0.4rem;
+}
+
+.weather_description * h3 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-right: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.weather_pressure {
+  font-size: 1.05rem;
+  font-weight: normal;
+  color: rgb(222, 211, 211);
+}
+
+.weather_country {
+  height: 100%;
+  padding-bottom: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 1rem;
+}
+
+.weather_country h3 {
+  margin-bottom: 1rem;
+}
+
+.weather_display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
